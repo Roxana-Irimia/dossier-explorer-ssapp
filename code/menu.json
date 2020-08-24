@@ -11,14 +11,6 @@
             "name": "Explorer",
             "path": "/explorer",
             "pageSrc": "Wallet/wallet.html"
-        },
-        {
-            "name": "My Apps",
-            "path": "/my-apps",
-            "icon": "fa-plug",
-            "children": "@event:getSSApps",
-            "propName": "appName",
-            "component": "psk-ssapp"
         }
     ]
 }

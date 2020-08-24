@@ -7,7 +7,6 @@
         "avatar": "/assets/images/dossier-explorer.png"
     },
     "modals": {
-        "signOutModal": "Wallet/modals/sign-out-modal.html",
         "createDossierModal": "Wallet/modals/dossier/create-dossier-modal.html",
         "receiveDossierModal": "Wallet/modals/dossier/receive-dossier-modal.html",
         "runAppModal": "Wallet/modals/dossier/run-app-modal.html",

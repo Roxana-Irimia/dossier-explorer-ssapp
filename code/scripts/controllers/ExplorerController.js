@@ -135,7 +135,7 @@ export default class ExplorerController extends ContainerController {
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
                 .replace(Constants.PATH_PLACEHOLDER, response.path)
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -153,7 +153,7 @@ export default class ExplorerController extends ContainerController {
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
                 .replace(Constants.PATH_PLACEHOLDER, response.path)
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -183,7 +183,7 @@ export default class ExplorerController extends ContainerController {
             const successMessage = this.model[Constants.SUCCESS].delete
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -215,7 +215,7 @@ export default class ExplorerController extends ContainerController {
                 .replace(Constants.FROM_PLACEHOLDER, response.from)
                 .replace(Constants.TO_PLACEHOLDER, response.to);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -251,7 +251,7 @@ export default class ExplorerController extends ContainerController {
                 .replace(Constants.FROM_PLACEHOLDER, response.from)
                 .replace(Constants.TO_PLACEHOLDER, response.to);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -292,7 +292,7 @@ export default class ExplorerController extends ContainerController {
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
                 .replace(Constants.PATH_PLACEHOLDER, response.path);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -314,7 +314,7 @@ export default class ExplorerController extends ContainerController {
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
                 .replace(Constants.PATH_PLACEHOLDER, response.path);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         });
     }
 
@@ -364,7 +364,7 @@ export default class ExplorerController extends ContainerController {
 
             // Close the ui-loader as upload is finished
             this.feedbackController.setLoadingState(false);
-            this.explorerNavigator.listWalletContent();
+            this.explorerNavigator.listDossierContent();
         })
     };
 

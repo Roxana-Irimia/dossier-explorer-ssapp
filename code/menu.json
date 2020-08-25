@@ -10,7 +10,7 @@
     "pages": [{
             "name": "Explorer",
             "path": "/explorer",
-            "pageSrc": "Wallet/wallet.html"
+            "pageSrc": "app/explorer.html"
         }
     ]
 }

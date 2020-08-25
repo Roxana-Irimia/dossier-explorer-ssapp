@@ -16,17 +16,17 @@ export default class ExplorerNavigationController extends ContainerController {
         this.dossierService = getDossierServiceInstance();
         this.feedbackController = new FeedbackController(this.model);
 
-        this.listWalletContent();
+        this.listDossierContent();
         this._initNavigationLinks();
         this._initListeners();
     }
 
-    listWalletContent = () => {
+    listDossierContent = () => {
         this.feedbackController.setLoadingState(true);
         let wDir = this.model.currentPath || '/';
         // Reset the last selected item(if any), as for the moment we support only single selection
         this._resetLastSelected();
-        this.dossierService.readDirDetailed(wDir, this._updateWalletContent);
+        this.dossierService.readDirDetailed(wDir, this._updateDossierContent);
     }
 
     changeDirectoryHandler = (event) => {
@@ -164,7 +164,7 @@ export default class ExplorerNavigationController extends ContainerController {
          * Model chain change watchers
          */
         this.model.onChange('currentPath', () => {
-            this.listWalletContent();
+            this.listDossierContent();
             this._initNavigationLinks();
         });
     };
@@ -221,7 +221,7 @@ export default class ExplorerNavigationController extends ContainerController {
         }
     }
 
-    _updateWalletContent = (err, dirContent) => {
+    _updateDossierContent = (err, dirContent) => {
         let newContent = [];
 
         if (err) {

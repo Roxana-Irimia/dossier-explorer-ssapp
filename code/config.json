@@ -7,15 +7,15 @@
         "avatar": "/assets/images/dossier-explorer.png"
     },
     "modals": {
-        "createDossierModal": "Wallet/modals/dossier/create-dossier-modal.html",
-        "receiveDossierModal": "Wallet/modals/dossier/receive-dossier-modal.html",
-        "runAppModal": "Wallet/modals/dossier/run-app-modal.html",
-        "shareDossierModal": "Wallet/modals/dossier/share-dossier-modal.html",
-        "deleteModal": "Wallet/modals/actions/delete-modal.html",
-        "renameModal": "Wallet/modals/actions/rename-modal.html",
-        "moveModal": "Wallet/modals/actions/move-modal.html",
-        "viewFileModal": "Wallet/modals/file-folder/view-file-modal.html",
-        "newFileModal": "Wallet/modals/file-folder/new-file-modal.html",
-        "newFolderModal": "Wallet/modals/file-folder/new-folder-modal.html"
+        "createDossierModal": "app/modals/dossier/create-dossier-modal.html",
+        "receiveDossierModal": "app/modals/dossier/receive-dossier-modal.html",
+        "runAppModal": "app/modals/dossier/run-app-modal.html",
+        "shareDossierModal": "app/modals/dossier/share-dossier-modal.html",
+        "deleteModal": "app/modals/actions/delete-modal.html",
+        "renameModal": "app/modals/actions/rename-modal.html",
+        "moveModal": "app/modals/actions/move-modal.html",
+        "viewFileModal": "app/modals/file-folder/view-file-modal.html",
+        "newFileModal": "app/modals/file-folder/new-file-modal.html",
+        "newFolderModal": "app/modals/file-folder/new-folder-modal.html"
     }
 }

@@ -1,12 +1,8 @@
-const basePagesPath = "/pages/Wallet/";
-
-const pageLoader = {
-    walletContent: `${basePagesPath}wallet-content.html`
-};
+const explorerContent = "/pages/app/explorer-content.html";
 
 const rootModel = {
     pageLoader: {
-        ...pageLoader
+        explorerContent:explorerContent
     },
     contentTypesToDisplay: ["applications", "mounts", "folders", "files"],
     content: [],

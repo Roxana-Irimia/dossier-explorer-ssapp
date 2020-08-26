@@ -3,12 +3,13 @@
         <psk-label slot="title" class="title" label="@title"></psk-label>
 
         <psk-condition condition="@conditionalExpressions.isLoading">
-            <psk-ui-loader slot="condition-true" should-be-rendered="true"> </psk-ui-loader>
+            <psk-ui-loader should-be-rendered="true"> </psk-ui-loader>
+        </psk-condition>
 
-            <div slot="condition-false" class='content'>
+            <div class='content'>
             </div>
 
-            <psk-condition slot="condition-false" condition='@closingConfirmation.opened'>
+            <psk-condition condition='@closingConfirmation.opened'>
                 <div class='unsaved-file'>
                     <psk-label label="@closingConfirmation.disclaimerMessage"></psk-label>
                     <psk-button-group class="modal-buttons">
@@ -19,7 +20,7 @@
                 </div>
             </psk-condition>
 
-            <div slot="condition-false" class='footer' slot='footer'>
+            <div class='footer'>
                 <psk-button-group class="modal-buttons">
                     <psk-condition condition="@textEditor.isEditable">
                         <psk-condition condition="@isEditing">
@@ -34,7 +35,6 @@
                     <psk-button view-model="buttons.downloadButton"> </psk-button>
                 </psk-button-group>
             </div>
-        </psk-condition>
 
         <psk-label label="@error.message" class="error"></psk-label>
     </psk-modal>

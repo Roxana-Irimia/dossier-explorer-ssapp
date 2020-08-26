@@ -143,15 +143,15 @@ export default class ViewFileController extends ModalController {
             clearInnerHTML();
 
             const conditionElm = document.createElement("psk-condition");
-            conditionElm.condition = "@isEditing";
+            conditionElm.setAttribute("condition","@isEditing");
 
             const liveCodeElm = document.createElement("psk-live-code");
-            liveCodeElm.slot = "condition-true";
-            liveCodeElm.setAttribute('view-model', 'textEditor');
+            liveCodeElm.setAttribute("slot","condition-true");
+            liveCodeElm.setAttribute('view-model', '@textEditor');
 
             const codeElm = document.createElement("psk-code");
-            codeElm.slot = "condition-false";
-            codeElm.language = "@textEditor.language";
+            codeElm.setAttribute("slot","condition-false");
+            codeElm.setAttribute("language","@textEditor.language");
             codeElm.innerHTML = this.model.textEditor.value;
 
             conditionElm.appendChild(liveCodeElm);
@@ -251,6 +251,6 @@ export default class ViewFileController extends ModalController {
             assetModal.append(assetObject);
         }
 
-        this.feedbackController.setLoadingState();
+        this.feedbackController.setLoadingState(false);
     }
 }

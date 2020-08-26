@@ -1,4 +1,5 @@
 const viewFileViewModel = {
+    isEditing:false,
     closingConfirmation: {
         opened: false,
         disclaimerMessage: "You are about to exit the editor. Save the file?",

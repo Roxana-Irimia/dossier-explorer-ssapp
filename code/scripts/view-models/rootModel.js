@@ -7,7 +7,6 @@ const rootModel = {
     contentTypesToDisplay: ["applications", "mounts", "folders", "files"],
     content: [],
     navigationLinks: [],
-    pageTitle: "Explorer",
     currentPath: '/',
     dateFormatOptions: {
         date: 'dd-mm-yyyy',

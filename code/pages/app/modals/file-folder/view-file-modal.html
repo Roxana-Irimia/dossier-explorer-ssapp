@@ -9,30 +9,36 @@
             <div class='content'>
             </div>
 
-            <psk-condition condition='@closingConfirmation.opened'>
-                <div class='unsaved-file'>
-                    <psk-label label="@closingConfirmation.disclaimerMessage"></psk-label>
-                    <psk-button-group class="modal-buttons">
-                        <psk-button view-model="@closingConfirmation.buttons.saveAndExitButton"></psk-button>
-                        <psk-button view-model="@closingConfirmation.buttons.dismissAndExitButton"></psk-button>
-                        <psk-button view-model="@closingConfirmation.buttons.cancelButton"></psk-button>
-                    </psk-button-group>
-                </div>
-            </psk-condition>
-
             <div class='footer'>
                 <psk-button-group class="modal-buttons">
                     <psk-condition condition="@textEditor.isEditable">
-                        <psk-condition condition="@isEditing">
-                            <psk-button-group slot='condition-true' class="modal-buttons">
-                                <psk-button view-model="buttons.saveButton"> </psk-button>
-                            </psk-button-group>
+                        <psk-condition slot="condition-true" condition="@isEditing">
+
+                            <psk-condition slot='condition-true' condition='@closingConfirmation.opened'>
+                                <div class='unsaved-file' slot='condition-true'>
+                                    <psk-label label="@closingConfirmation.disclaimerMessage"></psk-label>
+                                    <psk-button-group class="modal-buttons">
+                                        <psk-button view-model="@closingConfirmation.buttons.saveAndExitButton"></psk-button>
+                                        <psk-button view-model="@closingConfirmation.buttons.dismissAndExitButton"></psk-button>
+                                        <psk-button view-model="@closingConfirmation.buttons.cancelButton"></psk-button>
+                                    </psk-button-group>
+                                </div>
+
+                                <psk-button-group slot='condition-false' class="modal-buttons">
+                                    <psk-button view-model="buttons.saveButton"> </psk-button>
+                                </psk-button-group>
+
+                            </psk-condition>
+
+
+
                             <psk-button-group slot='condition-false' class="modal-buttons">
                                 <psk-button view-model="buttons.editButton"> </psk-button>
+                                <psk-button view-model="buttons.downloadButton"> </psk-button>
                             </psk-button-group>
                         </psk-condition>
+                        <psk-button slot="condition-false" view-model="buttons.downloadButton"> </psk-button>
                     </psk-condition>
-                    <psk-button view-model="buttons.downloadButton"> </psk-button>
                 </psk-button-group>
             </div>
 

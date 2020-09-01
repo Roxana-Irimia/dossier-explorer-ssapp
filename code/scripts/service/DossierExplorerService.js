@@ -57,10 +57,6 @@ class DossierExplorerService {
         $$.interactions.startSwarmAs("test/agent/007", "listDossiers", "printSeed", path, dossierName)
             .onReturn(callback);
     }
-    getMountedDossier(path, callback) {
-        $$.interactions.startSwarmAs("test/agent/007", "listDossiers", "getMountedDossier", path)
-            .onReturn(callback);
-    }
 
 }
 

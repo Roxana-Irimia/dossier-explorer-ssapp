@@ -3,29 +3,6 @@ const keyssiresolver = require("opendsu").loadApi("resolver");
 const commons = require('./commons');
 const constants = require('./constants');
 
-function initializeBDNS(callback) {
-    rawDossier.getKeySSI((err, keySSI) => {
-        if (err) {
-            return callback(err);
-        }
-
-        const keySSIInstance = require("key-ssi-resolver").KeySSIFactory.create(keySSI);
-        $$.BDNS.addConfig("default", {
-            endpoints: [{
-                endpoint: keySSIInstance.getHint(),
-                type: 'brickStorage'
-            },
-                {
-                    endpoint: keySSIInstance.getHint(),
-                    type: 'anchorService'
-                }
-            ]
-        })
-        callback(undefined);
-    });
-}
-
-
 $$.swarms.describe('readDir', {
     readDir: function(path, options) {
         if (rawDossier) {
@@ -174,25 +151,23 @@ $$.swarms.describe('rename', {
 $$.swarms.describe("attachDossier", {
     newDossier: function(path, dossierName) {
         if (rawDossier) {
-            initializeBDNS((err) => {
-                if (err) {
-                    return this.return(err);
-                }
-
                 const keyssiSpace = require("opendsu").loadApi("keyssi");
-                const keyssi = keyssiSpace.buildTemplateKeySSI("default");
-                keyssiresolver.createDSU(keyssi, (err, newDossier) => {
+                rawDossier.getKeySSI((err, ssi) => {
                     if (err) {
                         return this.return(err);
                     }
-                    newDossier.getKeySSI((err, keySSI) => {
+                    const templateSSI = keyssiSpace.buildSeedSSI(keyssiSpace.parse(ssi).getDLDomain());
+                    keyssiresolver.createDSU(templateSSI, (err, newDossier) => {
                         if (err) {
                             return this.return(err);
                         }
-
-                        this.mountDossier(path, keySSI, dossierName);
+                        newDossier.getKeySSI((err, keySSI) => {
+                            if (err) {
+                                return this.return(err);
+                            }
+                            this.mountDossier(path, keySSI, dossierName);
+                        });
                     });
-                });
             });
         } else {
             this.return(new Error("Raw Dossier is not available."))
@@ -262,7 +237,6 @@ $$.swarms.describe('add', {
             const folderPath = `${path}/${folderName}`;
 
             rawDossier.addFolder(folderPath, folderPath, { ignoreMounts: false }, (err, res) => {
-                console.log(folderPath, folderPath, err, res);
                 if (!err) {
                     this.return(err, res);
                 }

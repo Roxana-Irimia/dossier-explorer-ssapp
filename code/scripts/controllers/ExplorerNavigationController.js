@@ -157,7 +157,7 @@ export default class ExplorerNavigationController extends ContainerController {
     _initListeners = () => {
         this.on('select-wallet-item', this.selectWalletItemHandler);
         this.on('double-click-item', this.doubleClickHandler);
-        this.on('change-directory', this.changeDirectoryHandler);
+        this.on('breadcrumb-click', this.changeDirectoryHandler);
         this.on('sort-working-directory', this.sortWorkingDirectoryHandler);
 
         /**

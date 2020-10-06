@@ -8,11 +8,8 @@
             <psk-icon slot="condition-false" icon="pencil" color="#8197bc" class="dossier-icon icon-big"></psk-icon>
             <psk-label slot="condition-false" label="@contentLabels.selectDestinationLabel"></psk-label>
 
-            <psk-for-each slot="condition-false" class='navigation-links' data-view-model='navigationLinks'>
-                <psk-button label='@label' event-name='change-directory' event-data='@path' button-class='cd-link' disabled='@disabled'>
-                </psk-button>
-                <psk-label>/</psk-label>
-            </psk-for-each>
+            <psk-breadcrumb-navigator slot="condition-false" mode="scroll" segments="@navigationLinks">
+            </psk-breadcrumb-navigator>
 
             <psk-grid slot="condition-false" class="content-wrapper" data-grid-layout="@isGridLayout">
                 <psk-grid class="wallet-header">

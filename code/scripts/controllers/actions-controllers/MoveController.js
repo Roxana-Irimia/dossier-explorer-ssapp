@@ -71,10 +71,7 @@ export default class MoveController extends ModalController {
         event.stopImmediatePropagation();
 
         this.responseCallback(undefined, {
-            success: true,
-            result: {
-                cancel: true
-            }
+            cancel: true
         });
     }
 }

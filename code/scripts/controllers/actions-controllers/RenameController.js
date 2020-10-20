@@ -22,10 +22,7 @@ export default class RenameController extends ModalController {
 
     _handleCancelRename = () => {
         this.responseCallback(undefined, {
-            success: true,
-            result: {
-                cancel: true
-            }
+            cancel: true
         });
     }
 

@@ -216,11 +216,13 @@ export default class ExplorerController extends ContainerController {
                 return this.feedbackEmitter(err, null, Constants.ERROR_FEEDBACK_TYPE);
             }
 
-            const successMessage = this.model[Constants.SUCCESS].rename
-                .replace(Constants.FROM_PLACEHOLDER, response.from)
-                .replace(Constants.TO_PLACEHOLDER, response.to);
-            this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listDossierContent();
+            if (!response.cancel) {
+                const successMessage = this.model[Constants.SUCCESS].rename
+                    .replace(Constants.FROM_PLACEHOLDER, response.from)
+                    .replace(Constants.TO_PLACEHOLDER, response.to);
+                this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
+                this.explorerNavigator.listDossierContent();
+            }
         });
     }
 
@@ -251,12 +253,14 @@ export default class ExplorerController extends ContainerController {
                 return this.feedbackEmitter(err, null, Constants.ERROR_FEEDBACK_TYPE);
             }
 
-            const successMessage = this.model[Constants.SUCCESS].move
-                .replace(Constants.NAME_PLACEHOLDER, response.name)
-                .replace(Constants.FROM_PLACEHOLDER, response.from)
-                .replace(Constants.TO_PLACEHOLDER, response.to);
-            this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
-            this.explorerNavigator.listDossierContent();
+            if (!response.cancel) {
+                const successMessage = this.model[Constants.SUCCESS].move
+                    .replace(Constants.NAME_PLACEHOLDER, response.name)
+                    .replace(Constants.FROM_PLACEHOLDER, response.from)
+                    .replace(Constants.TO_PLACEHOLDER, response.to);
+                this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
+                this.explorerNavigator.listDossierContent();
+            }
         });
     }
 

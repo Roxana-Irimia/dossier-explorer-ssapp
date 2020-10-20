@@ -16,9 +16,10 @@ export default class ExplorerNavigationController extends ContainerController {
         this.dossierService = getDossierServiceInstance();
         this.feedbackController = new FeedbackController(this.model);
 
+        this._initListeners();
+
         this.listDossierContent();
         this._initNavigationLinks();
-        this._initListeners();
     }
 
     listDossierContent = () => {
@@ -167,20 +168,29 @@ export default class ExplorerNavigationController extends ContainerController {
             this.listDossierContent();
             this._initNavigationLinks();
         });
+
+        this.breadcrumbElement = this.element.querySelector("psk-breadcrumb-navigator");
+        this.model.onChange("navigationLinks", () => {
+            if (this.breadcrumbElement) {
+                this.breadcrumbElement.segments = this.model.toObject("navigationLinks");
+            }
+        });
     };
+
+    _updateNavigationLinks = (links) => {
+        this.model.navigationLinks = links;
+    }
 
     _initNavigationLinks = () => {
         let wDir = this.model.currentPath || '/';
         let links = [{
             label: this.model.contentLabels.myWalletLabel,
-            path: '/',
-            disabled: false
+            path: '/'
         }];
 
         // If the current path is root
         if (wDir === '/') {
-            links[0].disabled = true;
-            this.model.setChainValue('navigationLinks', links);
+            this._updateNavigationLinks(links);
             return;
         }
 
@@ -199,16 +209,12 @@ export default class ExplorerNavigationController extends ContainerController {
 
             links.push({
                 label: pathSegment,
-                path: path,
-                disabled: false
+                path: path
             });
         });
 
-        // Disable the last link as it is the current directory in navigation
-        links[links.length - 1].disabled = true;
-
         // Set the navigation links to view-model
-        this.model.setChainValue('navigationLinks', links);
+        this._updateNavigationLinks(links);
     }
 
     _resetLastSelected = () => {

@@ -156,7 +156,7 @@ $$.swarms.describe("attachDossier", {
                     if (err) {
                         return this.return(err);
                     }
-                    const templateSSI = keyssiSpace.buildSeedSSI(keyssiSpace.parse(ssi).getDLDomain());
+                    const templateSSI = keyssiSpace.buildTemplateSeedSSI(keyssiSpace.parse(ssi).getDLDomain());
                     keyssiresolver.createDSU(templateSSI, (err, newDossier) => {
                         if (err) {
                             return this.return(err);

@@ -152,7 +152,7 @@ $$.swarms.describe("attachDossier", {
     newDossier: function(path, dossierName) {
         if (rawDossier) {
                 const keyssiSpace = require("opendsu").loadApi("keyssi");
-                rawDossier.getKeySSI((err, ssi) => {
+                rawDossier.getKeySSIAsString((err, ssi) => {
                     if (err) {
                         return this.return(err);
                     }
@@ -161,7 +161,7 @@ $$.swarms.describe("attachDossier", {
                         if (err) {
                             return this.return(err);
                         }
-                        newDossier.getKeySSI((err, keySSI) => {
+                        newDossier.getKeySSIAsString((err, keySSI) => {
                             if (err) {
                                 return this.return(err);
                             }
@@ -180,7 +180,7 @@ $$.swarms.describe("attachDossier", {
                     return this.return(err);
                 }
 
-                loadedDossier.getKeySSI((err, keySSI) => {
+                loadedDossier.getKeySSIAsString((err, keySSI) => {
                     if (err) {
                         return this.return(err);
                     }
@@ -212,7 +212,7 @@ $$.swarms.describe("attachDossier", {
             }
 
             //make sure if is the case to work with the current rawDossier instance
-            rawDossier.getKeySSI((err, keySSI) => {
+            rawDossier.getKeySSIAsString((err, keySSI) => {
                 if (err) {
                     return this.return(err);
                 }

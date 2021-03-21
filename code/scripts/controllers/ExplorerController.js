@@ -85,10 +85,11 @@ export default class ExplorerController extends ContainerController {
         this.model.optionsMenu.icon = selectedItem.icon;
         this.model.optionsMenu.name = selectedItem.name;
         this.model.optionsMenu.dataType = selectedItem.dataType;
-    }
+    };
+
     _checkForLandingApp() {
         this.DSUStorage.getObject("apps/.landingApp", (err, landingApp) => {
-            if (!err && landingApp.name) {
+            if (!err && landingApp && landingApp.name) {
                 this.showModal("runApp", { name: landingApp.name });
                 this.dossierService.deleteFileFolder("apps/.landingApp", (err) => {
                     if (err) {
@@ -119,7 +120,7 @@ export default class ExplorerController extends ContainerController {
                 //TODO: what should happen when user closes the app?
             })
         })
-    }
+    };
 
     _handleSwitchLayout = (event) => {
         event.preventDefault();
@@ -140,11 +141,11 @@ export default class ExplorerController extends ContainerController {
 
             const successMessage = this.model[Constants.SUCCESS].dossierCreated
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
-                .replace(Constants.PATH_PLACEHOLDER, response.path)
+                .replace(Constants.PATH_PLACEHOLDER, response.path);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
             this.explorerNavigator.listDossierContent();
         });
-    }
+    };
 
     _receiveDossierHandler = (event) => {
         event.preventDefault();
@@ -158,11 +159,11 @@ export default class ExplorerController extends ContainerController {
 
             const successMessage = this.model[Constants.SUCCESS].dossierImported
                 .replace(Constants.NAME_PLACEHOLDER, response.name)
-                .replace(Constants.PATH_PLACEHOLDER, response.path)
+                .replace(Constants.PATH_PLACEHOLDER, response.path);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
             this.explorerNavigator.listDossierContent();
         });
-    }
+    };
 
     _testDossierHandler = (event) => {
         event.preventDefault();
@@ -196,11 +197,11 @@ export default class ExplorerController extends ContainerController {
             }
 
             const successMessage = this.model[Constants.SUCCESS].delete
-                .replace(Constants.NAME_PLACEHOLDER, response.name)
+                .replace(Constants.NAME_PLACEHOLDER, response.name);
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
             this.explorerNavigator.listDossierContent();
         });
-    }
+    };
 
     _renameHandler = (event) => {
         event.preventDefault();
@@ -234,7 +235,7 @@ export default class ExplorerController extends ContainerController {
                 this.explorerNavigator.listDossierContent();
             }
         });
-    }
+    };
 
     _moveHandler = (event) => {
         event.preventDefault();
@@ -272,7 +273,7 @@ export default class ExplorerController extends ContainerController {
                 this.explorerNavigator.listDossierContent();
             }
         });
-    }
+    };
 
     _shareDossierHandler = (event) => {
         event.preventDefault();
@@ -291,13 +292,13 @@ export default class ExplorerController extends ContainerController {
                 this.feedbackEmitter(err, null, Constants.ERROR_FEEDBACK_TYPE);
             }
         });
-    }
+    };
 
     _addNewFileHandler = (event) => {
         event.stopImmediatePropagation();
 
         let wDir = this.model.currentPath || '/';
-        if (wDir == '/') {
+        if (wDir === '/') {
             wDir = '';
         }
 
@@ -313,13 +314,13 @@ export default class ExplorerController extends ContainerController {
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
             this.explorerNavigator.listDossierContent();
         });
-    }
+    };
 
     _addNewFolderHandler = (event) => {
         event.stopImmediatePropagation();
 
         let wDir = this.model.currentPath || '/';
-        if (wDir == '/') {
+        if (wDir === '/') {
             wDir = '';
         }
 
@@ -335,7 +336,7 @@ export default class ExplorerController extends ContainerController {
             this.feedbackEmitter(successMessage, null, Constants.SUCCESS_FEEDBACK_TYPE);
             this.explorerNavigator.listDossierContent();
         });
-    }
+    };
 
     _handleFileFolderUpload = (event) => {
         event.stopImmediatePropagation();
@@ -401,7 +402,7 @@ export default class ExplorerController extends ContainerController {
         if (itemViewModel.type === 'file') {
             this._handleDownloadFile(this.model.currentPath, itemViewModel.name);
         }
-    }
+    };
 
     _handleDownloadFile(path, fileName) {
         let fileDownloader = new FileDownloader(path, fileName);
@@ -425,7 +426,7 @@ export default class ExplorerController extends ContainerController {
         }
 
         this.explorerNavigator.openViewFileModal(itemViewModel);
-    }
+    };
 
     _getSelectedItemAndWorkingDir = (name) => {
         if (!this.model.content.length) {
@@ -441,11 +442,11 @@ export default class ExplorerController extends ContainerController {
             currentPath: this.model.currentPath,
             selectedItem: this._getCleanProxyObject(selectedItem)
         };
-    }
+    };
 
     _getSelectedItem = (name) => {
         return this.model.content.find((el) => el.name === name);
-    }
+    };
 
     _getCleanProxyObject = (obj) => {
         return obj ? JSON.parse(JSON.stringify(obj)) : null;

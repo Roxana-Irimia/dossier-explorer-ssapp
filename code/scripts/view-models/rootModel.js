@@ -34,6 +34,7 @@ const rootModel = {
         addFolderLabel: "Upload folder",
         createDossierLabel: "Create Dossier",
         receiveDossierLabel: "Receive Dossier",
+        testDossierHandlerLabel: "Test Dossier Handler",
     },
     hoverLabels: {
         switchGridHover: "Click to switch to list",

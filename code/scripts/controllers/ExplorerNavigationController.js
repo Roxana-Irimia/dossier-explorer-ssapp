@@ -227,6 +227,31 @@ export default class ExplorerNavigationController extends ContainerController {
         }
     }
 
+    _filterExcludedRootNames = (content, callback) => {
+        this.DSUStorage.getObject("code/config.json", (err, configJSON) => {
+            if (err) {
+                return callback(err);
+            }
+
+            let newContent = {};
+            if (configJSON && configJSON.excludedDisplayedNames && configJSON.excludedDisplayedNames.length) {
+                this.model.contentTypesToDisplay.forEach(type => {
+                    newContent[type] = this._filterType(content[type], configJSON.excludedDisplayedNames);
+                });
+
+                return callback(undefined, newContent);
+            }
+
+            return callback(undefined, content);
+        });
+    };
+
+    _filterType = (namesList = [], excludedNames = []) => {
+        return namesList.filter(name => {
+            return excludedNames.findIndex(excludedName => excludedName === name) === -1;
+        });
+    };
+
     _updateDossierContent = (err, dirContent) => {
         let newContent = [];
 
@@ -234,23 +259,32 @@ export default class ExplorerNavigationController extends ContainerController {
             this.feedbackController.setLoadingState(false);
             this.feedbackController.updateDisplayedMessage(Constants.ERROR, err);
             this.model.setChainValue('content', newContent);
-            return;
+            return console.error(err);
         }
 
-        this.model.contentTypesToDisplay.map((type) => {
-            if (dirContent[type] && dirContent[type].length) {
-                const updatedContent = this._updateContentForType(
-                    dirContent[type],
-                    walletContentViewModel[type]
-                );
-
-                newContent = [...newContent, ...updatedContent];
+        this._filterExcludedRootNames(dirContent, (err, newDirContent) => {
+            if (err) {
+                this.feedbackController.setLoadingState(false);
+                this.feedbackController.updateDisplayedMessage(Constants.ERROR, err);
+                this.model.setChainValue('content', newContent);
+                return console.error(err);
             }
-        });
 
-        this.model.setChainValue('content', newContent);
-        this.feedbackController.setLoadingState(false);
-    }
+            this.model.contentTypesToDisplay.forEach((type) => {
+                if (newDirContent[type] && newDirContent[type].length) {
+                    const updatedContent = this._updateContentForType(
+                        newDirContent[type],
+                        walletContentViewModel[type]
+                    );
+
+                    newContent = [...newContent, ...updatedContent];
+                }
+            });
+
+            this.model.setChainValue('content', newContent);
+            this.feedbackController.setLoadingState(false);
+        });
+    };
 
     /**
      * TODO:

@@ -84,7 +84,8 @@ export default class ExplorerNavigationController extends ContainerController {
                     break;
                 }
             case 'application':
-            case 'dossier':
+            case 'csb':
+            case "dossier":
             case 'folder':
                 let wDir = this.model.currentPath || '/';
                 let newWorkingDirectory = wDir === '/' ?
@@ -117,7 +118,7 @@ export default class ExplorerNavigationController extends ContainerController {
         const content = JSON.parse(JSON.stringify(this.model.content));
 
         let newContent = [];
-        ["application", "dossier", "folder", "file"].forEach((type) => {
+        ["application", "csb", "dossier", "folder", "file"].forEach((type) => {
             let sortedContent = content.filter(el => el.type === type);
             sortedContent = this._sortByProperty(sortedContent, propertyName, reverseSorting);
 

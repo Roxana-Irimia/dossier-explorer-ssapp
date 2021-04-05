@@ -413,7 +413,7 @@ export default class ExplorerController extends ContainerController {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        const selectedItem = this._getSelectedItem(event.data);
+        const { currentPath, selectedItem } = this._getSelectedItemAndWorkingDir(event.data);
         if (!selectedItem) {
             console.error(`No item selected to be downloaded!`);
             return;
@@ -425,6 +425,7 @@ export default class ExplorerController extends ContainerController {
             return;
         }
 
+        itemViewModel.currentPath = currentPath;
         this.explorerNavigator.openViewFileModal(itemViewModel);
     };
 

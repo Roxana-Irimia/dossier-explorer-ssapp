@@ -48,8 +48,8 @@ class DossierExplorerService {
             .onReturn(callback);
     }
 
-    deleteDossier(path, callback) {
-        $$.interactions.startSwarmAs("test/agent/007", "delete", "dossier", path)
+    deleteDossier(path, name, callback) {
+        $$.interactions.startSwarmAs("test/agent/007", "delete", "dossier", path, name)
             .onReturn(callback);
     }
 

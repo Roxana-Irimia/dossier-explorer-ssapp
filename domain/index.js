@@ -151,23 +151,25 @@ $$.swarms.describe('rename', {
 $$.swarms.describe("attachDossier", {
     newDossier: function(path, dossierName) {
         if (rawDossier) {
-                const keyssiSpace = require("opendsu").loadApi("keyssi");
-                rawDossier.getKeySSIAsString((err, ssi) => {
+            const keyssiSpace = require("opendsu").loadApi("keyssi");
+            rawDossier.getKeySSIAsString((err, ssi) => {
+                if (err) {
+                    return this.return(err);
+                }
+
+                keyssiresolver.createDSU(ssi, (err, newDossier) => {
                     if (err) {
                         return this.return(err);
                     }
-                    const templateSSI = keyssiSpace.buildTemplateSeedSSI(keyssiSpace.parse(ssi).getDLDomain());
-                    keyssiresolver.createDSU(templateSSI, (err, newDossier) => {
+
+                    newDossier.getKeySSIAsString((err, keySSI) => {
                         if (err) {
                             return this.return(err);
                         }
-                        newDossier.getKeySSIAsString((err, keySSI) => {
-                            if (err) {
-                                return this.return(err);
-                            }
-                            this.mountDossier(path, keySSI, dossierName);
-                        });
+
+                        this.mountDossier(path, keySSI, dossierName);
                     });
+                });
             });
         } else {
             this.return(new Error("Raw Dossier is not available."))
@@ -175,21 +177,17 @@ $$.swarms.describe("attachDossier", {
     },
     fromSeed: function(path, dossierName, SEED) {
         if (rawDossier) {
-            keyssiresolver.loadDSU(SEED, (err, loadedDossier) => {
+            return keyssiresolver.loadDSU(SEED, (err) => {
                 if (err) {
+                    console.error(err);
                     return this.return(err);
                 }
 
-                loadedDossier.getKeySSIAsString((err, keySSI) => {
-                    if (err) {
-                        return this.return(err);
-                    }
-                    this.mountDossier(path, keySSI, dossierName);
-                });
+                this.mountDossier(path, SEED, dossierName);
             });
-        } else {
-            this.return(new Error("Raw Dossier is not available."))
         }
+
+        this.return(new Error("Raw Dossier is not available."));
     },
     mountDossier: function(path, keySSI, dossierName) {
         commons.getParentDossier(rawDossier, path, (err, parentKeySSI, relativePath) => {
@@ -250,14 +248,52 @@ $$.swarms.describe('add', {
 $$.swarms.describe('delete', {
     fileFolder: function(path) {
         if (rawDossier) {
-            return rawDossier.delete(path, this.return);
+            return rawDossier.delete(path, (err, result) => {
+                if (err) {
+                    console.error(err);
+                    return this.return(err);
+                }
+
+                this.return(undefined, {
+                    success: true,
+                    path: path,
+                    result: result
+                });
+            });
         }
 
         this.return(new Error("Raw Dossier is not available."))
     },
-    dossier: function(path) {
+    dossier: function(path, name) {
         if (rawDossier) {
-            return rawDossier.unmount(path, this.return);
+            return commons.getParentDossier(rawDossier, path, (err, parentKeySSI, relativePath) => {
+                if (err) {
+                    console.error(err);
+                    return this.return(err);
+                }
+
+                keyssiresolver.loadDSU(parentKeySSI, (err, parentDSU) => {
+                    if (err) {
+                        console.error(err);
+                        return this.return(err);
+                    }
+
+                    const unmountPath = `${path.replace(relativePath, '')}/${name}`;
+                    parentDSU.unmount(unmountPath, (err, result) => {
+                        if (err) {
+                            console.error(err);
+                            return this.return(err);
+                        }
+
+                        this.return(undefined, {
+                            success: true,
+                            path: path,
+                            unmountPath: unmountPath,
+                            result: result
+                        });
+                    });
+                });
+            });
         }
 
         this.return(new Error("Raw Dossier is not available."))
@@ -271,7 +307,7 @@ $$.swarms.describe('listDossiers', {
                 return this.return(err);
             }
             this.return(undefined, relativePath);
-        })
+        });
     },
     printSeed: function(path, dossierName) {
         if (rawDossier) {

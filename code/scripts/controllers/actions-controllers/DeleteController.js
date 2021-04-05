@@ -51,9 +51,13 @@ export default class DeleteController extends ModalController {
     }
 
     _deleteSelectedItems(callback) {
-        const path = this.model.path,
+        let path = this.model.path,
             name = this.model.selectedItemName,
             type = this.model.selectedItemType;
+
+        if (path === "/") {
+            path = "";
+        }
 
         switch (type) {
             case 'file':
@@ -64,9 +68,10 @@ export default class DeleteController extends ModalController {
                     });
                     break;
                 }
+            case 'csb':
             case 'dossier':
                 {
-                    this.dossierService.deleteDossier(`${path}/${name}`, (err) => {
+                    this.dossierService.deleteDossier(path, name, (err) => {
                         callback(err, name);
                     });
                     break;

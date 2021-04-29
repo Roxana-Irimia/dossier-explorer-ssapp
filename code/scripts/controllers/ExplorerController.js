@@ -11,6 +11,7 @@ import rootModel from "../view-models/rootModel.js";
 import createDossierViewModel from '../view-models/modals/dossier-modals/createDossierViewModel.js';
 import receiveDossierViewModel from '../view-models/modals/dossier-modals/receiveDossierViewModel.js';
 import testDossierHandlerViewModel from '../view-models/modals/dossier-modals/testDossierHandlerViewModel.js';
+import testContractViewModel from '../view-models/modals/dossier-modals/testContractViewModel.js';
 import shareDossierViewModel from '../view-models/modals/dossier-modals/shareDossierViewModel.js';
 
 import newFileViewModel from "../view-models/modals/file-folder-modals/newFileViewModel.js";
@@ -49,6 +50,7 @@ export default class ExplorerController extends ContainerController {
         this.on('create-dossier', this._createDossierHandler);
         this.on('receive-dossier', this._receiveDossierHandler);
         this.on('test-dossier-handler', this._testDossierHandler);
+        this.on('test-contract', this._testContract);
         this.on('share-dossier', this._shareDossierHandler);
         this.on('delete', this._deleteHandler);
         this.on('rename', this._renameHandler);
@@ -171,6 +173,14 @@ export default class ExplorerController extends ContainerController {
 
         testDossierHandlerViewModel.currentPath = this.model.currentPath;
         this.showModal('testDossierHandlerModal', testDossierHandlerViewModel);
+    }
+
+    _testContract = (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        testContractViewModel.currentPath = this.model.currentPath;
+        this.showModal('testContractModal', testContractViewModel);
     }
 
     _deleteHandler = (event) => {

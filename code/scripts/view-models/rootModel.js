@@ -35,6 +35,7 @@ const rootModel = {
         createDossierLabel: "Create Dossier",
         receiveDossierLabel: "Receive Dossier",
         testDossierHandlerLabel: "Test Dossier Handler",
+        testContractLabel: "Test Contract Method",
     },
     hoverLabels: {
         switchGridHover: "Click to switch to list",

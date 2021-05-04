@@ -10,6 +10,7 @@
         "createDossierModal": "app/modals/dossier/create-dossier-modal.html",
         "receiveDossierModal": "app/modals/dossier/receive-dossier-modal.html",
         "testDossierHandlerModal": "app/modals/dossier/test-dossier-handler-modal.html",
+        "testContractModal": "app/modals/dossier/test-contract-modal.html",
         "runAppModal": "app/modals/dossier/run-app-modal.html",
         "shareDossierModal": "app/modals/dossier/share-dossier-modal.html",
         "deleteModal": "app/modals/actions/delete-modal.html",

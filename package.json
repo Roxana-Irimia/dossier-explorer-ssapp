@@ -1,27 +1,27 @@
 {
-  "name": "dossier-explorer-ssapp",
-  "version": "1.0.0",
-  "description": "Dossier Explorer SSApp",
-  "main": "index.js",
-  "scripts": {
-    "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
-    "build": "node ./node_modules/octopus/scripts/buildDSU.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PrivateSky/dossier-explorer-ssapp.git"
-  },
-  "dependencies": {
-    "octopus": "git+https://github.com/PrivateSky/octopus.git"
-  },
-  "keywords": [
-    "dossier-explorer",
-    "ssapp"
-  ],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/PrivateSky/dossier-explorer-ssapp/issues"
-  },
-  "homepage": "https://github.com/PrivateSky/dossier-explorer-ssapp#readme"
+    "name": "dossier-explorer-ssapp",
+    "version": "v1.0.1",
+    "description": "Dossier Explorer SSApp",
+    "main": "index.js",
+    "scripts": {
+        "prebuild": "node ./node_modules/octopus/scripts/run prebuild devmode",
+        "build": "node ./node_modules/octopus/scripts/buildDSU.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PrivateSky/dossier-explorer-ssapp.git"
+    },
+    "dependencies": {
+        "octopus": "git+https://github.com/PrivateSky/octopus.git"
+    },
+    "keywords": [
+        "dossier-explorer",
+        "ssapp"
+    ],
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/PrivateSky/dossier-explorer-ssapp/issues"
+    },
+    "homepage": "https://github.com/PrivateSky/dossier-explorer-ssapp#readme"
 }

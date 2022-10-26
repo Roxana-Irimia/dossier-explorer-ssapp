@@ -12,7 +12,7 @@
         "url": "git+https://github.com/opendsu/dossier-explorer-ssapp.git"
     },
     "dependencies": {
-        "octopus": "git+https://github.com/PrivateSky/octopus.git"
+        "octopus": "git+https://github.com/opendsu/octopus.git"
     },
     "keywords": [
         "dossier-explorer",

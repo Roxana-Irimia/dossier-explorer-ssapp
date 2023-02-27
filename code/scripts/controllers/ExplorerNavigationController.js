@@ -1,19 +1,25 @@
 import ContainerController from "../../cardinal/controllers/base-controllers/ContainerController.js";
-import {
-    getDossierServiceInstance
-} from "../service/DossierExplorerService.js";
+
 import FeedbackController from "./FeedbackController.js";
 
 import walletContentViewModel from '../view-models/walletContentViewModel.js';
 import viewFileViewModel from "../view-models/modals/file-folder-modals/viewFileViewModel.js";
 import Constants from "./Constants.js";
+import { getNewDossierServiceInstance } from "../service/NewDossierExplorerService.js";
+// import { getDossierServiceInstance } from "../service/DossierExplorerService.js";
 
 export default class ExplorerNavigationController extends ContainerController {
     constructor(element, history, model) {
         super(element, history);
 
         this.model = model;
-        this.dossierService = getDossierServiceInstance();
+        this._init();
+        
+    }
+
+    async _init(){
+        this.dossierService = await getNewDossierServiceInstance();
+        // this.dossierService = getDossierServiceInstance();
         this.feedbackController = new FeedbackController(this.model);
 
         this._initListeners();

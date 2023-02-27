@@ -2,10 +2,6 @@ import ContainerController from "../../cardinal/controllers/base-controllers/Con
 import FileDownloader from "./file-folder-controllers/FileDownloader.js";
 import FeedbackController from "./FeedbackController.js";
 
-import {
-    getDossierServiceInstance
-} from "../service/DossierExplorerService.js";
-
 import rootModel from "../view-models/rootModel.js";
 
 import createDossierViewModel from '../view-models/modals/dossier-modals/createDossierViewModel.js';
@@ -23,12 +19,19 @@ import moveViewModel from '../view-models/modals/actions-modals/moveViewModel.js
 
 import ExplorerNavigationController from "./ExplorerNavigationController.js";
 import Constants from "./Constants.js";
+import { getNewDossierServiceInstance } from "../service/NewDossierExplorerService.js";
+// import { getDossierServiceInstance } from "../service/DossierExplorerService.js";
 
 export default class ExplorerController extends ContainerController {
     constructor(element, history) {
         super(element, history);
         this.model = this.setModel(this._getCleanProxyObject(rootModel));
-        this.dossierService = getDossierServiceInstance();
+        this._init(element, history);      
+    }
+
+    async _init(element, history){
+        this.dossierService = await getNewDossierServiceInstance();
+        // this.dossierService = getDossierServiceInstance();
         this.feedbackController = new FeedbackController(this.model);
         this.explorerNavigator = new ExplorerNavigationController(element, history, this.model);
 

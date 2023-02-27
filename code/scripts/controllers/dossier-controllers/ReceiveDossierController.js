@@ -1,15 +1,17 @@
 import ModalController from "../../../cardinal/controllers/base-controllers/ModalController.js";
 import FeedbackController from "../FeedbackController.js";
-import {
-    getDossierServiceInstance
-} from "../../service/DossierExplorerService.js";
 import Constants from "../Constants.js";
+import { getNewDossierServiceInstance } from "../../service/NewDossierExplorerService.js";
 
 export default class ReceiveDossierController extends ModalController {
     constructor(element, history) {
         super(element, history);
 
-        this.dossierService = getDossierServiceInstance();
+        this._init();
+    }
+    
+    async _init(){
+        this.dossierService = await getNewDossierServiceInstance();
         this.feedbackController = new FeedbackController(this.model);
 
         this._initListeners();

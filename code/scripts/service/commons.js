@@ -31,7 +31,7 @@ const getParentDossier = function(rawDossier, path, callback) {
     });
 };
 
-module.exports = {
+export {
     getParentDossier
 };
 
